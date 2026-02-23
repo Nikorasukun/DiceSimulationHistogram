@@ -12,9 +12,6 @@ namespace DiceSimulationHistogram
 
         static void Main(string[] args)
         {
-            //makes the cursor invisible for more clarity
-            Console.CursorVisible = false;
-
             //variable declaration
             Random rand = new Random();
             int[] values;
@@ -26,8 +23,8 @@ namespace DiceSimulationHistogram
                 //variable initialization
                 values = new int[diceDimension];
 
-                //throwing dice 300 times
-                for (int i = 0; i < 1000; i++)
+                //throwing dice x times
+                for (int i = 0; i < 2000; i++)
                 {
                     values[rand.Next(0, diceDimension)]++;
                 }
@@ -47,6 +44,13 @@ namespace DiceSimulationHistogram
 
                 //creation of variables
                 char[,] histogram = new char[diceDimension, /*values.Max()*/250];
+
+                //value min chopping
+                int minVal = values.Min();
+                for(int i = 0; i < values.Length; i++)
+                {
+                    values[i] -= minVal - 1;
+                }
 
                 //histogram filling algorithm
                 for (int i = 0; i < histogram.GetLength(0); i++)
